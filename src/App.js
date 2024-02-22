@@ -12,27 +12,27 @@ const App = () => {
   const nftData = useMemo(() => [
     {
       id: 1,
-      picture: 'https://miro.medium.com/v2/resize:fit:628/1*xm2-adeU3YD4MsZikpc5UQ.png',
+      picture: 'https://i.pinimg.com/564x/ea/7d/52/ea7d5281da8fac29baeca7a863e7d5d7.jpg',
     },
     {
       id: 2,
-      picture: 'https://cryptopotato.com/wp-content/uploads/2022/05/img1_bayc.jpg',
+      picture: 'https://i.pinimg.com/564x/e3/2f/51/e32f516e1164e0c445ccd0bfb5f24337.jpg',
     },
     {
       id: 3,
-      picture: 'https://lh3.googleusercontent.com/WnI8a9xVVylM_kcC2N7dQMRyHwhv0eOmexqNRxmlYtcKq7-kV-oSjsqx-2VBIUDzrBC2TVkcjDBgcVyTh4QsiJgsw-EXDslNHkWOIA=w1400-k',
+      picture: 'https://i.pinimg.com/564x/e5/9d/fe/e59dfed15d6a7d1f7603dfbb104573cd.jpg',
     },
     {
       id: 4,
-      picture: 'https://techstory.in/wp-content/uploads/2022/07/Screenshot-2022-07-11-at-8.57.18-AM-1024x1024.png',
+      picture: 'https://i.pinimg.com/564x/24/c8/9b/24c89bda027cbf2b9277f0db67be8d9d.jpg',
     },
     {
       id: 5,
-      picture: 'https://lh3.googleusercontent.com/852YyC23BYLgILgw77DzDOkCiGEYKhHhzCwzo-sI6aks2AxcrlqSyzaavP-SMW50gP4i3SaumGbzP4CH2WGgKRdOofjBrNYSAoBAyg=w1400-k',
+      picture: 'https://i.pinimg.com/originals/dc/cf/6c/dccf6c06349ba8bf00c6639b1416924e.jpg',
     },
     {
       id: 6,
-      picture: 'https://static.wixstatic.com/media/95db9b_c857dc8dc7094bd3aaf4556ef0a45d13~mv2.png/v1/fit/w_600%2Ch_600%2Cal_c/file.png',
+      picture: 'https://i.pinimg.com/564x/21/62/5d/21625d50f8151fb8f69aa67325f0466f.jpg',
     }
   ], []);
 
@@ -49,13 +49,13 @@ const App = () => {
   // Function to add an item to the cart
   const addToCart = (item) => {
     setCartItems([...cartItems, item]);
-    setTotalPrice(totalPrice + parseFloat(item.price));
+    setTotalPrice(totalPrice + parseFloat(parseFloat(item.price).toFixed(2)));
   };
 
   // Function to handle removing an item from the cart
 const removeFromCart = (itemToRemove) => {
   // Calculate the new total price by subtracting the price of the removed item
-  const newTotalPrice = totalPrice - parseFloat(itemToRemove.price);
+  const newTotalPrice = totalPrice - parseFloat(parseFloat(itemToRemove.price).toFixed(2));
 
   // Filter out the removed item from the cart items
   const updatedCartItems = cartItems.filter((item) => item.id !== itemToRemove.id);

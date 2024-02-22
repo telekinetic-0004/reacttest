@@ -52,10 +52,12 @@ code {
 
 .nft-table {
   border-collapse: collapse;
-  width: flex;
+  width: fit-content;
 }
 
 .nft-table td {
+  border: 1px solid black;
+  padding: 8px;
   width: flex;
   height: flex;
   overflow: hidden;
@@ -134,11 +136,6 @@ code {
   height: 70%;
   object-fit: cover;
 }
-
-.cart-content td:nth-child(2) {
-  /* Removed width property to allow it to adjust based on content */
-}
-
 
 .remove-button{
   font-family: 'Courier New', Courier, monospace;
