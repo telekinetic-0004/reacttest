@@ -36,33 +36,38 @@ const App = () => {
     }
   ], []);
 
-  // Function to generate random prices between 5 to 10 with decimals
-  const generateRandomPrices = (nftData) => {
-    return nftData.map((nft) => ({
+// Function to generate random prices less than 0.00001
+const generateRandomPrices = (nftData) => {
+  return nftData.map((nft) => {
+    const price = Number((Math.random() * 0.00001).toFixed(10)); // Convert to number
+    return {
       ...nft,
-      price: (Math.random() * (10 - 5) + 5).toFixed(2),
-    }));
-  };
+      price: price.toFixed(10), // Format as a string with 10 decimal places
+    };
+  });
+};
 
   const nftDataWithPrices = useMemo(() => generateRandomPrices(nftData), [nftData]);
 
-  // Function to add an item to the cart
-  const addToCart = (item) => {
-    setCartItems([...cartItems, item]);
-    setTotalPrice(totalPrice + parseFloat(parseFloat(item.price).toFixed(2)));
-  };
+// Function to add an item to the cart
+const addToCart = (item) => {
+  const price=Number(parseFloat(item.price).toFixed(10));
+  setCartItems([...cartItems, item]);
+  setTotalPrice(Number((totalPrice + price).toFixed(10))); 
+};
 
   // Function to handle removing an item from the cart
-const removeFromCart = (itemToRemove) => {
+  const removeFromCart = (itemToRemove) => {
+    const pricetoremove=parseFloat(itemToRemove.price)
   // Calculate the new total price by subtracting the price of the removed item
-  const newTotalPrice = totalPrice - parseFloat(parseFloat(itemToRemove.price).toFixed(2));
+  const newTotalPrice = totalPrice - pricetoremove;
 
   // Filter out the removed item from the cart items
   const updatedCartItems = cartItems.filter((item) => item.id !== itemToRemove.id);
 
   // Update the cart items and total price
   setCartItems(updatedCartItems);
-  setTotalPrice(newTotalPrice);
+  setTotalPrice(Number(newTotalPrice.toFixed(10)));
 };
 
 

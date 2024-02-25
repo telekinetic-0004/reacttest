@@ -3,11 +3,18 @@ import '../index.css';
 
 const Cart = ({ cartItems, totalPrice, onPayClick, onClearCart, onRemoveItem }) => {
   const hasItems = cartItems.length > 0;
+  const canPay = totalPrice > 0;
+
+  const handlePayClick = () => {
+    if (canPay) {
+      onPayClick();
+    }
+  };
 
   return (
     <div className='cart'>
-      <h2>Your Cart</h2>
-      {!hasItems && <p>No items in the cart</p>}
+      <h2>Your Cart (scroll if needed) </h2>
+      {!hasItems && <p>No items in the cart. Select an NFT to add to the cart.</p>}
       {hasItems && (
         <div className='cart-items'>
           <table className='cart-content'>
@@ -30,23 +37,20 @@ const Cart = ({ cartItems, totalPrice, onPayClick, onClearCart, onRemoveItem }) 
                   </td>
                 </tr>
               ))}
-              <tr>
-                <td>Total:</td>
-                <td>{totalPrice}</td>
-                <td></td>
-              </tr>
             </tbody>
           </table>
         </div>
       )}
-      <div>
-        {hasItems && (
-          <>
-            <button className='clear-button' onClick={onClearCart}>Clear Cart</button>
-            <button className='pay-button' onClick={onPayClick}>Pay</button>
-          </>
-        )}
-      </div>
+      <div >
+  {hasItems && (
+    <>
+      <button className='clear-button' onClick={onClearCart}>Clear Cart</button>
+      <div className="spacer"></div> {/* Add spacer to separate the buttons */}
+      <button className={`pay-button ${canPay ? '' : 'pay-button-disabled'}`} onClick={handlePayClick} disabled={!canPay}>Pay: {totalPrice} ETH</button>
+    </>
+  )}
+</div>
+
     </div>
   );
 };
